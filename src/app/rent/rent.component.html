@@ -1,0 +1,31 @@
+<h2>Rent Payment Details</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flat Number</th>
+      <th>Resident Name</th>
+      <th>Rent Amount</th>
+      <th>Payment Status</th>
+      <th>Due Amount</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let resident of residents">
+      <td>{{ resident.flatNumber }}</td>
+      <td>{{ resident.name }}</td>
+      <td>{{ resident.rentAmount }}</td>
+      <td>{{ resident.paymentStatus }}</td>
+      <td>{{ resident.paymentStatus === 'unpaid' ? '$' + resident.rentAmount : '$0' }}</td>
+      <td><button (click)="sendReminderEmail(resident)" [disabled]="resident.paymentStatus === 'paid'">Send Reminder</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<p *ngIf="unpaidResidents.length > 0">
+  Email reminder will be sent to unpaid residents after 5-10 days.
+</p>
+<p *ngIf="unpaidResidents.length === 0">
+  All residents have paid their rent.
+</p>

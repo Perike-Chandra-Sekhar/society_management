@@ -1,0 +1,40 @@
+<h2>Flats Details</h2>
+
+<!-- Free Flats -->
+<section *ngIf="(getFreeFlats() | async) as freeFlats">
+    <h3>Free Flats</h3>
+    <ul>
+        <li *ngFor="let flat of freeFlats">
+            Flat No: {{ flat.flatNumber }}
+        </li>
+    </ul>
+</section>
+<p *ngIf="!(getFreeFlats() | async)">No free flats available</p>
+
+<!-- Occupied Flats -->
+<section *ngIf="(getOccupiedFlats() | async) as occupiedFlats">
+    <h3>Occupied Flats</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Flat No</th>
+                <th>Owner Name</th>
+                <th>Mobile Number</th>
+                <th>Date of Arrival</th>
+                <th>Rental Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let flat of occupiedFlats">
+                <td>{{ flat.flatNumber }}</td>
+                <td>{{ flat.ownerName }}</td>
+                <td>{{ flat.mobileNumber }}</td>
+                <td>{{ flat.dateOfArrival }}</td>
+                <td>{{ flat.rentalAmount }}</td>
+            </tr>
+            <tr *ngIf="occupiedFlats.length === 0">
+                <td colspan="5">No occupied flats</td>
+            </tr>
+        </tbody>
+    </table>
+</section>

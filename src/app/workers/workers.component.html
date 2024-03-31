@@ -1,0 +1,29 @@
+<h2>Worker Wage Details</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Worker ID</th>
+      <th>Worker Name</th>
+      <th>Wage Amount</th>
+      <th>Payment Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let worker of workers">
+      <td>{{ worker.workerId }}</td>
+      <td>{{ worker.workerName }}</td>
+      <td>{{ worker.wageAmount }}</td>
+      <td>
+        <span [ngClass]="{'paid': worker.paymentStatus === 'paid', 'unpaid': worker.paymentStatus === 'unpaid'}">
+          {{ worker.paymentStatus }}
+        </span>
+      </td>
+      <td>
+        <button *ngIf="worker.paymentStatus === 'unpaid'" (click)="markPaid(worker)">Mark Paid</button>
+        <span *ngIf="worker.paymentStatus === 'paid'">Paid</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
